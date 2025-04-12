@@ -45,7 +45,7 @@ const Detail = () => {
         {/* Sidebar */}
         <div className="col-md-6 bg-dark text-white vh-100 p-4">
           <img src="/src/assets/images/image 1.png" className="img-fluid w-10" style={{ width: "80px" }} alt="Logo" />
-          <h1 className="fs-3 mb-4">EduWave</h1>
+          <h1 className="fs-3 mb-4">HospitALL</h1>
           <h2 id="course-title" className="fs-4 mb-4">
             Course Title: {currentCourse.title}
           </h2>

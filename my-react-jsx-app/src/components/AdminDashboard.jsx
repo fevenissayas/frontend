@@ -105,9 +105,9 @@ const AdminDashboard = () => {
             <img
               className="mb-0"
               src="/src/assets/images/image 2.png"
-              alt="EduWave Logo"
+              alt="HospitALL Logo"
             />
-            <span className="fs-6 my-0">EduWave</span>
+            <span className="fs-6 my-0">HospitALL</span>
           </a>
         </div>
         <div className="col text-end">

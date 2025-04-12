@@ -41,8 +41,8 @@ const Courses = () => {
       <nav className="navbar navbar-expand-lg navbar-light bg-light py-3">
         <div className="container">
           <a className="navbar-brand d-flex align-items-center" href="index.html">
-            <img className="me-2 w-40" src="src/assets/images/image 2.png" alt="EduWave Logo" />
-            <span className="fs-2">EduWave</span>
+            <img className="me-2 w-40" src="src/assets/images/image 2.png" alt="HospitALL Logo" />
+            <span className="fs-2">HospitALL</span>
           </a>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span className="navbar-toggler-icon"></span>
@@ -67,7 +67,7 @@ const Courses = () => {
       <div className="container py-5">
         <h1 className="display-4 mb-4">Courses</h1>
         <p className="lead mb-5">
-          EduWave offers a rich collection of notes and presentations from teachers, covering various subjects like Mathematics, Science, Art, and more. With interactive lessons and resources, it's designed to help students learn, grow, and excel at their own pace.
+          HospitALL offers a rich collection of notes and presentations from teachers, covering various subjects like Mathematics, Science, Art, and more. With interactive lessons and resources, it's designed to help students learn, grow, and excel at their own pace.
         </p>
 
         {/* Course Grid */}

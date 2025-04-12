@@ -83,7 +83,7 @@ const DocumentManager = () => {
           style={{ width: "80px" }}
           alt="Logo"
         />
-        <span className="fs-4">EduWave</span>
+        <span className="fs-4">HospitALL</span>
       </header>
 
       <main>
