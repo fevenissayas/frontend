@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 import '../assets/styles/style.css';
 
-const Login = () => {
+const Signup = () => {
   const [formData, setFormData] = useState({
+    name: '',
     email: '',
     password: '',
+    role: '',
   });
 
   const [errors, setErrors] = useState({
+    name: '',
     email: '',
     password: '',
+    role: '',
   });
 
   // Email validation function
@@ -23,6 +27,11 @@ const Login = () => {
     e.preventDefault();
     const newErrors = {};
 
+    // Validate name
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required.';
+    }
+
     // Validate email
     if (!validateEmail(formData.email)) {
       newErrors.email = 'Please enter a valid email address.';
@@ -33,12 +42,17 @@ const Login = () => {
       newErrors.password = 'Password must be at least 8 characters long.';
     }
 
+    // Validate role
+    if (!formData.role) {
+      newErrors.role = 'Please select a role.';
+    }
+
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
     } else {
       console.log('Form is valid, submitting...', formData);
       setErrors({});
-      setFormData({ email: '', password: '' });
+      setFormData({ name: '', email: '', password: '', role: '' });
     }
   };
 
@@ -73,11 +87,28 @@ const Login = () => {
 
           {/* Right Panel */}
           <div className="col-md-7 right-panel p-5 rounded-end d-flex flex-column justify-content-center align-items-center text-center">
-            <h1 className="mb-1 text-start w-100">Login</h1>
+            <h1 className="mb-1 text-start w-100">Sign Up</h1>
             <h4 className="text-muted mb-4 mt-3 ">
-              Welcome back! Glad to see you again!
+              Join EduWave to simplify, organize, and achieve!
             </h4>
             <form onSubmit={handleSubmit}>
+              <div className="mb-3">
+                <input
+                  type="text"
+                  className={`form-control rounded-3 ${
+                    errors.name ? 'is-invalid' : ''
+                  }`}
+                  id="name"
+                  placeholder="Name"
+                  style={{ width: '250px' }}
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                />
+                {errors.name && (
+                  <div className="invalid-feedback">{errors.name}</div>
+                )}
+              </div>
               <div className="mb-3">
                 <input
                   type="email"
@@ -112,18 +143,39 @@ const Login = () => {
                   <div className="invalid-feedback">{errors.password}</div>
                 )}
               </div>
+              <div className="mb-3">
+                <select
+                  className={`form-select rounded-3 ${
+                    errors.role ? 'is-invalid' : ''
+                  }`}
+                  id="role"
+                  style={{ width: '250px' }}
+                  value={formData.role}
+                  onChange={handleChange}
+                  required
+                >
+                  <option value="" disabled>
+                    Select Role
+                  </option>
+                  <option value="student">Student</option>
+                  <option value="teacher">Teacher</option>
+                </select>
+                {errors.role && (
+                  <div className="invalid-feedback">{errors.role}</div>
+                )}
+              </div>
               <button
                 type="submit"
                 className="btn btn-dark w-100 rounded-3 mb-4"
                 style={{ width: '250px' }}
               >
-                Login
+                Sign Up
               </button>
             </form>
             <p className="text-center mt-4 mb-0">
-              Do you have an account?{' '}
-              <a href="index.html" className="text-primary custom-link">
-                Register Now
+              Already have an account?{' '}
+              <a href="login.html" className="text-primary custom-link">
+                Login
               </a>
             </p>
           </div>
@@ -133,4 +185,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;
