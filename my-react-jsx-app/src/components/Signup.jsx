@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../assets/styles/style.css';
+import { Link } from 'react-router-dom';
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -64,7 +65,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="container rounded-4 p-1">
+    <div className="container rounded-4 p-1 mt-5">
       <div className="card registration-card mx-auto shadow-lg rounded-4">
         <div className="row g-0 py-9">
           {/* Left Panel */}
@@ -77,7 +78,7 @@ const Signup = () => {
                 alt="Logo"
               />
             </div>
-            <h1 className="mb-4">EduWave</h1>
+            <h1 className="mb-4">HospitALL</h1>
             <p className="mb-0">
               Not Your Average Web – Simplify,
               <br />
@@ -87,10 +88,10 @@ const Signup = () => {
 
           {/* Right Panel */}
           <div className="col-md-7 right-panel p-5 rounded-end d-flex flex-column justify-content-center align-items-center text-center">
-            <h1 className="mb-1 text-start w-100">Sign Up</h1>
-            <h4 className="text-muted mb-4 mt-3 ">
-              Join EduWave to simplify, organize, and achieve!
-            </h4>
+            <h2 className="mb-1 text-start w-100 text-center">Sign Up</h2> <br />
+            <h5 className="text-muted mb-4 mt-3 ">
+              Shape your career, master your skills, and grow with every course!
+            </h5>
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
                 <input
@@ -174,9 +175,9 @@ const Signup = () => {
             </form>
             <p className="text-center mt-4 mb-0">
               Already have an account?{' '}
-              <a href="login.html" className="text-primary custom-link">
+              <Link to="/login" className="text-primary custom-link">
                 Login
-              </a>
+                </Link>
             </p>
           </div>
         </div>

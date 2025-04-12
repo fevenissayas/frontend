@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../assets/styles/style.css';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -50,7 +51,7 @@ const Login = () => {
   };
 
   return (
-    <div className="container rounded-4 p-1">
+    <div className="container rounded-4 p-1 mt-5">
       <div className="card registration-card mx-auto shadow-lg rounded-4">
         <div className="row g-0 py-9">
           {/* Left Panel */}
@@ -63,7 +64,7 @@ const Login = () => {
                 alt="Logo"
               />
             </div>
-            <h1 className="mb-4">EduWave</h1>
+            <h1 className="mb-4">HospitALL</h1>
             <p className="mb-0">
               Not Your Average Web – Simplify,
               <br />
@@ -122,9 +123,9 @@ const Login = () => {
             </form>
             <p className="text-center mt-4 mb-0">
               Do you have an account?{' '}
-              <a href="index.html" className="text-primary custom-link">
-                Register Now
-              </a>
+              <Link to="/signup" className="text-primary custom-link">
+                Signup
+                </Link>
             </p>
           </div>
         </div>
