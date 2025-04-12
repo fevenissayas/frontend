@@ -4,32 +4,32 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const coursesData = [
   {
     id: "1",
-    title: "Fundamental Of Electrical Circuit",
-    publishedBy: "Mr. Vittapu",
+    title: "Hospitality Leadership: From Supervisor to Leader",
+    publishedBy: "Amira Delgado",
     href: "#electrical-circuit",
   },
   {
     id: "2",
-    title: "Fundamental Of Software Engineering",
-    publishedBy: "Mr. Vittapu",
+    title: "Spa & Wellness Service Training for Resorts",
+    publishedBy: "Rina Patel",
     href: "#software-engineering",
   },
   {
     id: "3",
-    title: "Human Computer Interaction",
-    publishedBy: "Mr. Mittapu",
+    title: "Cross-Cultural Communication in Global Resorts",
+    publishedBy: "Luc Bouchard",
     href: "#human-computer-interaction",
   },
   {
     id: "4",
-    title: "Computer Architecture and Organization",
-    publishedBy: "Mr. Abebe",
+    title: "Housekeeping Excellence & Efficiency Standards",
+    publishedBy: "Marwa Fikru",
     href: "#computer-architecture",
   },
   {
     id: "5",
-    title: "Website Development",
-    publishedBy: "Mr. Betsegaw",
+    title: "Exceptional Guest Services: The Art of First Impressions",
+    publishedBy: "Jared Liu",
     href: "#website-development",
   },
 ];
