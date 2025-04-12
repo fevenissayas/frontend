@@ -10,6 +10,7 @@ const AdminDashboard = () => {
       teacherId: "1234",
       email: "betsegaw@gmail.com",
       course: "Website Development",
+      role: "Teacher",
     },
     {
       id: 2,
@@ -17,73 +18,108 @@ const AdminDashboard = () => {
       teacherId: "5678",
       email: "vittapu@gmail.com",
       course: "Fundamental of Electrical Circuit",
+      role: "Teacher",
     },
   ]);
-  const [studentsCount] = useState(200);
-  const [nextTeacherId, setNextTeacherId] = useState(3);
 
-  const addNewTeacher = () => {
-    const newTeacher = {
-      id: nextTeacherId,
-      name: "New Teacher",
-      teacherId: "Enter ID",
+  const [studentsData, setStudentsData] = useState([
+    {
+      id: 1,
+      name: "John Doe",
+      studentId: "9012",
+      email: "johndoe@gmail.com",
+      course: "Mathematics",
+      role: "Student",
+    },
+  ]);
+
+  const [nextUserId, setNextUserId] = useState(3);
+  const [selectedRole, setSelectedRole] = useState("Teacher"); // Default role
+
+  const addNewUser = () => {
+    const newUser = {
+      id: nextUserId,
+      name: "New User",
+      [`${selectedRole.toLowerCase()}Id`]: "Enter ID",
       email: "Enter Email",
       course: "Enter Course",
+      role: selectedRole,
     };
-    setTeachersData([...teachersData, newTeacher]);
-    setNextTeacherId(nextTeacherId + 1);
+
+    if (selectedRole === "Teacher") {
+      setTeachersData([...teachersData, newUser]);
+    } else if (selectedRole === "Student") {
+      setStudentsData([...studentsData, newUser]);
+    }
+
+    setNextUserId(nextUserId + 1);
   };
 
-  const updateTeacherData = (id, field, value) => {
-    setTeachersData((prevTeachers) =>
-      prevTeachers.map((teacher) =>
-        teacher.id === id ? { ...teacher, [field]: value } : teacher
-      )
-    );
+  const updateUserData = (id, field, value, role) => {
+    if (role === "Teacher") {
+      setTeachersData((prevTeachers) =>
+        prevTeachers.map((teacher) =>
+          teacher.id === id ? { ...teacher, [field]: value } : teacher
+        )
+      );
+    } else if (role === "Student") {
+      setStudentsData((prevStudents) =>
+        prevStudents.map((student) =>
+          student.id === id ? { ...student, [field]: value } : student
+        )
+      );
+    }
   };
 
-  const deleteTeacher = (id) => {
-    setTeachersData(teachersData.filter((teacher) => teacher.id !== id));
+  const deleteUser = (id, role) => {
+    if (role === "Teacher") {
+      setTeachersData(teachersData.filter((teacher) => teacher.id !== id));
+    } else if (role === "Student") {
+      setStudentsData(studentsData.filter((student) => student.id !== id));
+    }
   };
 
-  const TeacherRow = ({ teacher }) => (
+  const UserRow = ({ user, role }) => (
     <tr>
-      <td>{teachersData.indexOf(teacher) + 1}</td>
+      <td>{role === "Teacher" ? teachersData.indexOf(user) + 1 : studentsData.indexOf(user) + 1}</td>
       <td
         contentEditable
         suppressContentEditableWarning
-        onBlur={(e) => updateTeacherData(teacher.id, "teacherId", e.target.textContent)}
+        onBlur={(e) =>
+          updateUserData(user.id, `${role.toLowerCase()}Id`, e.target.textContent, role)
+        }
       >
-        {teacher.teacherId}
+        {user[`${role.toLowerCase()}Id`]}
       </td>
       <td
         contentEditable
         suppressContentEditableWarning
-        onBlur={(e) => updateTeacherData(teacher.id, "name", e.target.textContent)}
+        onBlur={(e) => updateUserData(user.id, "name", e.target.textContent, role)}
       >
-        {teacher.name}
+        {user.name}
       </td>
       <td
         contentEditable
         suppressContentEditableWarning
-        onBlur={(e) => updateTeacherData(teacher.id, "email", e.target.textContent)}
+        onBlur={(e) => updateUserData(user.id, "email", e.target.textContent, role)}
       >
-        {teacher.email}
+        {user.email}
       </td>
       <td
         contentEditable
         suppressContentEditableWarning
-        onBlur={(e) => updateTeacherData(teacher.id, "course", e.target.textContent)}
+        onBlur={(e) => updateUserData(user.id, "course", e.target.textContent, role)}
       >
-        {teacher.course}
+        {user.course}
       </td>
+      <td>{user.role}</td>
       <td>
         <a
           href="#"
           className="text-primary"
           onClick={(e) => {
             e.preventDefault();
-            deleteTeacher(teacher.id);
+            deleteUser(user.id, role);
           }}
         >
           Delete
@@ -134,78 +170,73 @@ const AdminDashboard = () => {
               <i className="bi bi-mortarboard-fill display-6 me-3"></i>
               <div>
                 <h5 className="card-title">Total Students</h5>
-                <h3 className="card-text">{studentsCount}</h3>
+                <h3 className="card-text">{studentsData.length}</h3>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Card for Tabs and Table */}
+      {/* Table */}
       <div className="card mb-4">
         <div className="card-body">
-          {/* Tabs for Teachers and Students */}
-          <ul className="nav nav-tabs mb-3">
-            <li className="nav-item">
-              <a
-                className="nav-link active"
-                href="#teachers"
-                data-bs-toggle="tab"
-              >
-                Teachers
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#students" data-bs-toggle="tab">
-                Students
-              </a>
-            </li>
-          </ul>
-
-          {/* Tab Content */}
-          <div className="tab-content">
-            {/* Teachers Tab */}
-            <div className="tab-pane fade show active" id="teachers">
-              <div className="d-flex justify-content-between mb-3">
-                <div className="input-group w-50">
-                  <span className="input-group-text" id="search-icon">
-                    <i className="bi bi-search"></i>
-                  </span>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Search"
-                    aria-label="Search"
-                  />
-                </div>
-                <button className="btn btn-dark" onClick={addNewTeacher}>
-                  + Add New Teacher
-                </button>
-              </div>
-              <table className="table table-hover">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Course</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {teachersData.map((teacher) => (
-                    <TeacherRow key={teacher.id} teacher={teacher} />
-                  ))}
-                </tbody>
-              </table>
+        <div className="d-flex justify-content-between mb-2 align-items-center" style={{ paddingTop: "0.5rem", paddingBottom: "0.5rem" }}>
+            <div className="input-group w-50">
+              <span className="input-group-text" id="search-icon">
+                <i className="bi bi-search"></i>
+              </span>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Search"
+                aria-label="Search"
+              />
             </div>
-
-            {/* Students Tab */}
-            <div className="tab-pane fade" id="students">
-              <p>Students tab content goes here.</p>
+            <div className="d-flex align-items-center" style={{ gap: "0.5rem" }}>
+              <select
+                className="form-select"
+                value={selectedRole}
+                onChange={(e) => setSelectedRole(e.target.value)}
+                style={{ paddingTop: "0.25rem", paddingBottom: "0.25rem" }}
+              >
+                <option value="Teacher">Teacher</option>
+                <option value="Student">Student</option>
+              </select>
+              <button
+                className="btn btn-dark"
+                onClick={addNewUser}
+                style={{
+                  paddingTop: "0.35rem",
+                  paddingBottom: "0.35rem",
+                  whiteSpace: "nowrap",
+                  width: "auto",
+                }}
+              >
+                + Add New User
+              </button>
             </div>
           </div>
+          <table className="table table-hover">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Course</th>
+                <th>Role</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {teachersData.map((teacher) => (
+                <UserRow key={teacher.id} user={teacher} role="Teacher" />
+              ))}
+              {studentsData.map((student) => (
+                <UserRow key={student.id} user={student} role="Student" />
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
